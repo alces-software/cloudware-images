@@ -24,7 +24,7 @@ XML=domain.xml
 XML_RENDERED=$(IMAGE_NAME).xml
 
 # AWS config
-AWS_BUCKET=alces-cloudware
+AWS_BUCKET=cloudware-images
 AWS_BUCKET_DIR=images
 AWS_REGION=eu-west-2
 
