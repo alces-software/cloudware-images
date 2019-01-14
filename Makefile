@@ -9,7 +9,7 @@
 # default to aws
 PLATFORM=aws
 IMAGE_TYPE=alces-cloudware-base
-IMAGE_VERSION=2018.2.1
+IMAGE_VERSION=2019.1.0
 IMAGE_NAME=$(IMAGE_TYPE)-$(IMAGE_VERSION)-$(PLATFORM)
 
 # Libvirt/Oz config
@@ -33,6 +33,7 @@ AZURE_STORAGE_ACCOUNT=alcescloudware
 AZURE_STORAGE_CONTAINER=images
 AZURE_RESOURCE_GROUP=alces-cloudware
 AZURE_IMAGE_URL="https://$(AZURE_STORAGE_ACCOUNT).blob.core.windows.net/$(AZURE_STORAGE_CONTAINER)/$(IMAGE_NAME).vhd"
+AZURE_REGION=uksouth
 
 image: setup build prepare upload
 
@@ -81,7 +82,7 @@ upload-azure:
 		--name $(IMAGE_NAME).vhd
 	az image create --resource-group $(AZURE_RESOURCE_GROUP) \
 		--name $(IMAGE_NAME) \
-	  	--location uksouth \
+	  	--location $(AZURE_REGION) \
 	    --os-type Linux \
 	   	--source $(AZURE_IMAGE_URL)
 
