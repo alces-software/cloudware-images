@@ -21,6 +21,16 @@ There are a few notable config settings, including:
 - `IMAGE_VERSION` - Set the image version to create
 - `VM_DIR` - Set the VM dir, this should have enough space to create the image 
 
+## Build
+
+To assist the creation and distribution of the images, a wrapper script for building all platforms can be executed as:
+
+```
+bash build_all.sh
+```
+
+This will (currently) build the image for AWS and Azure, upload to the respective cloud platforms and then distribute around all of the regions.
+
 ## AWS
 
 ### Configuration
@@ -75,8 +85,6 @@ The final stage of the build process will output some JSON, displaying the VM im
 
 The new AMI in the above example will be `ami-fgrxv97s`. You can then copy this AMI round to other regions if required. 
 
-The AMI ID also needs to be updated in the provider templates, located in `providers/aws/templates/`
-
 ## Azure
 
 ### Configuration
@@ -101,7 +109,3 @@ Once the configuration and prerequisites are met - creating, preparing and uploa
 ```bash
 make image PLATFORM=azure
 ```
-
-### Post-build tasks
-
-Once the image has been created, the image reference needs to be updated in the Azure Cloudware templates located in `providers/azure/templates`.
