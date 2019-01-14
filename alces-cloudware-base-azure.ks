@@ -13,7 +13,7 @@ repo --name "extras" --baseurl="http://mirror.centos.org/centos/7/extras/x86_64/
 network  --bootproto=dhcp
 network  --hostname=localhost.localdomain
 # Root password
-rootpw alcesflightonazure
+rootpw azurecentosimage
 selinux --enforcing
 services --disabled="kdump" --enabled="network,sshd,rsyslog,chronyd"
 timezone UTC --isUtc

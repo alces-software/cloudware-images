@@ -134,9 +134,9 @@ mkdir -p /var/cache/yum
 # reorder console entries
 sed -i 's/console=tty0/console=tty0 console=ttyS0,115200n8/' /boot/grub2/grub.cfg
 
-# SFN - alces presets
+# SFN - build presets
 mkdir -p /etc/systemd/system-preset
-cat <<EOF > /etc/systemd/system-preset/00-alces-base.preset
+cat <<EOF > /etc/systemd/system-preset/00-build-base.preset
 disable libvirtd.service
 disable NetworkManager.service
 disable firewalld.service
@@ -198,9 +198,9 @@ cloud_final_modules:
  - final-message
 system_info:
   default_user:
-    name: alces
+    name: centos
     lock_passwd: true
-    gecos: Alces Administrator
+    gecos: Administrator
     groups: [wheel, adm, systemd-journal]
     sudo: ["ALL=(ALL) NOPASSWD:ALL"]
     shell: /bin/bash
