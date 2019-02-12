@@ -8,6 +8,7 @@ Notes on building and using Cloudware images on various platforms
 - Large amount of disk space
 - AWS/Azure command-line tools installed
 - Binary of qemu-img (>version that comes with CentOS [1.5.3]) which will need to be set as `QEMU_IMG_BIN` in `Makefile` (if wanting to do Azure stuff, most likely a build from source - https://www.qemu.org/download/#source)
+  - On a CentOS 7 system the compilation requires the group `"Development Tools"` and package `gtk2-devel` installed to be able to compile v2+ of qemu-img (v3.1.0 has been tested with the Azure deployment method)
 
 ## General usage
 
