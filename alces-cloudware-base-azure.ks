@@ -3,12 +3,9 @@ reboot
 firewall --enabled --service=ssh
 firstboot --disable
 ignoredisk --only-use=vda
-keyboard --vckeymap=us --xlayouts='us'
-# System language
-lang en_US.UTF-8
-repo --name "os" --baseurl="http://mirror.centos.org/centos/7/os/x86_64/" --cost=100
-repo --name "updates" --baseurl="http://mirror.centos.org/centos/7/updates/x86_64/" --cost=100
-repo --name "extras" --baseurl="http://mirror.centos.org/centos/7/extras/x86_64/" --cost=100
+keyboard uk
+lang en_GB 
+selinux --disabled
 # Network information
 network  --bootproto=dhcp
 network  --hostname=localhost.localdomain
@@ -16,7 +13,7 @@ network  --hostname=localhost.localdomain
 rootpw azurecentosimage
 selinux --enforcing
 services --disabled="kdump" --enabled="network,sshd,rsyslog,chronyd"
-timezone UTC --isUtc
+timezone --utc Europe/London
 # Disk
 bootloader --append="console=tty0" --location=mbr --timeout=1 --boot-drive=vda
 zerombr
@@ -156,7 +153,7 @@ sed -i 's/console=tty0/console=tty0 console=ttyS0,115200n8/' /boot/grub2/grub.cf
 
 %end
 
-%packages
+%packages --ignoremissing
 @core
 chrony
 WALinuxAgent

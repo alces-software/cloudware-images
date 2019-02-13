@@ -6,9 +6,6 @@ ignoredisk --only-use=vda
 keyboard uk
 lang en_GB
 selinux --disabled
-repo --name "os" --baseurl="http://mirror.centos.org/centos/7/os/x86_64/" --cost=100
-repo --name "updates" --baseurl="http://mirror.centos.org/centos/7/updates/x86_64/" --cost=100
-repo --name "extras" --baseurl="http://mirror.centos.org/centos/7/extras/x86_64/" --cost=100
 # Network information
 network  --bootproto=dhcp
 network  --hostname=localhost.localdomain
@@ -216,7 +213,7 @@ EOF
 
 %end
 
-%packages
+%packages --ignoremissing
 @core
 chrony
 cloud-init
