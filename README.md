@@ -27,7 +27,7 @@ There are a few notable config settings, including:
 To assist the creation and distribution of the images, a wrapper script for building all platforms can be executed as:
 
 ```
-bash build_all.sh
+make all
 ```
 
 This will (currently) build the image for AWS and Azure, upload to the respective cloud platforms and then distribute around all of the regions.
