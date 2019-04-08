@@ -13,6 +13,7 @@ IMAGE_NAME=alces-cloudware-base-2019.1.0-azure
 #
 #AZURE_REGIONS=$(az account list-locations |grep name |awk '{print $2}' |grep -v $AZURE_REGION |sed 's/"//g;s/,//g')
 AZURE_REGIONS=$(az provider show --namespace Microsoft.Storage --query "resourceTypes[?resourceType=='storageAccounts'].locations | [0]" -o tsv |sed 's/ //g' | tr '[:upper:]' '[:lower:]' |grep -v $AZURE_REGION |sort)
+COUNT=$(echo "$AZURE_REGIONS" |wc -l)
 
 # Print to JSON for ARM Templates
 echo
@@ -23,9 +24,14 @@ echo "\"images\": {
   },"
 
 for region in $AZURE_REGIONS ; do
+    COUNT=$(( $COUNT - 1 ))
     IMAGE=$(az image show --name $IMAGE_NAME-$region --resource-group $AZURE_RESOURCE_GROUP |grep id -m 1 |awk '{print $2}')
     echo "  {"
     echo "    \"$region\": \"$IMAGE\""
-    echo "  },"
+    if [ $COUNT == 0 ] ; then
+        echo "  }"
+    else
+        echo "  },"
+    fi
 done
 echo "}"
