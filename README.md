@@ -8,6 +8,7 @@ Notes on building and using Cloudware images on various platforms
 - Large amount of disk space
 - AWS/Azure command-line tools installed
 - Binary of qemu-img (>version that comes with CentOS [1.5.3]) which will need to be set as `QEMU_IMG_BIN` in `Makefile` (if wanting to do Azure stuff, most likely a build from source - https://www.qemu.org/download/#source)
+  - On a CentOS 7 system the compilation requires the group `"Development Tools"` and package `gtk2-devel` installed to be able to compile v2+ of qemu-img (v3.1.0 has been tested with the Azure deployment method)
 
 ## General usage
 
@@ -20,6 +21,16 @@ There are a few notable config settings, including:
 - `PLATFORM` - The platform to build an image for, e.g. `aws` or `azure`
 - `IMAGE_VERSION` - Set the image version to create
 - `VM_DIR` - Set the VM dir, this should have enough space to create the image 
+
+## Build
+
+To assist the creation and distribution of the images, a wrapper script for building all platforms can be executed as:
+
+```
+make all
+```
+
+This will (currently) build the image for AWS and Azure, upload to the respective cloud platforms and then distribute around all of the regions.
 
 ## AWS
 
@@ -75,8 +86,6 @@ The final stage of the build process will output some JSON, displaying the VM im
 
 The new AMI in the above example will be `ami-fgrxv97s`. You can then copy this AMI round to other regions if required. 
 
-The AMI ID also needs to be updated in the provider templates, located in `providers/aws/templates/`
-
 ## Azure
 
 ### Configuration
@@ -101,7 +110,3 @@ Once the configuration and prerequisites are met - creating, preparing and uploa
 ```bash
 make image PLATFORM=azure
 ```
-
-### Post-build tasks
-
-Once the image has been created, the image reference needs to be updated in the Azure Cloudware templates located in `providers/azure/templates`.
