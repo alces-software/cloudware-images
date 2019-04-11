@@ -1,7 +1,7 @@
 #!/bin/bash
 AZURE_REGION=uksouth
-AZURE_RESOURCE_GROUP=alces-cloudware
-IMAGE_NAME=alces-cloudware-base-2019.1.0-azure
+AZURE_RESOURCE_GROUP=openflight-cloud
+IMAGE_NAME=openflight-cloud-base-1.0-azure
 
 #
 # Only use Azure regions that support storageAccount resources.
@@ -19,19 +19,11 @@ COUNT=$(echo "$AZURE_REGIONS" |wc -l)
 echo
 echo
 echo "\"images\": {
-  {
-    \"$AZURE_REGION\": \"$(az image show --name $IMAGE_NAME --resource-group $AZURE_RESOURCE_GROUP |grep id -m 1 |awk '{print $2}')\"
-  },"
+    \"$AZURE_REGION\": \"$(az image show --name $IMAGE_NAME --resource-group $AZURE_RESOURCE_GROUP |grep id -m 1 |awk '{print $2}' |sed 's/"//g;s/,//g')\","
 
 for region in $AZURE_REGIONS ; do
     COUNT=$(( $COUNT - 1 ))
-    IMAGE=$(az image show --name $IMAGE_NAME-$region --resource-group $AZURE_RESOURCE_GROUP |grep id -m 1 |awk '{print $2}')
-    echo "  {"
-    echo "    \"$region\": \"$IMAGE\""
-    if [ $COUNT == 0 ] ; then
-        echo "  }"
-    else
-        echo "  },"
-    fi
+    IMAGE=$(az image show --name $IMAGE_NAME-$region --resource-group $AZURE_RESOURCE_GROUP |grep id -m 1 |awk '{print $2}' |sed 's/"//g;s/,//g')
+    echo "    \"$region\": \"$IMAGE\"$(if [ $COUNT != 0 ] ; then echo ',' ; fi)"
 done
 echo "}"
