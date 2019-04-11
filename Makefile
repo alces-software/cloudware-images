@@ -11,8 +11,8 @@ SHELL := /bin/bash
 # Image config
 # default to aws
 export PLATFORM=aws
-export IMAGE_TYPE=alces-cloudware-base
-export IMAGE_VERSION=2019.1.0
+export IMAGE_TYPE=openflight-cloud-base
+export IMAGE_VERSION=1.0
 export IMAGE_NAME=${IMAGE_TYPE}-${IMAGE_VERSION}-${PLATFORM}
 
 # Libvirt/Oz config
@@ -27,14 +27,14 @@ export XML=domain.xml
 export XML_RENDERED=${IMAGE_NAME}.xml
 
 # AWS config
-export AWS_BUCKET=cloudware-images
+export AWS_BUCKET=openflight-cloud
 export AWS_BUCKET_DIR=images
 export AWS_REGION=eu-west-2
 
 # Azure config
-export AZURE_STORAGE_ACCOUNT=alcescloudware
+export AZURE_STORAGE_ACCOUNT=openflightcloud
 export AZURE_STORAGE_CONTAINER=images
-export AZURE_RESOURCE_GROUP=alces-cloudware
+export AZURE_RESOURCE_GROUP=openflight-cloud
 export AZURE_IMAGE_URL=https://${AZURE_STORAGE_ACCOUNT}.blob.core.windows.net/${AZURE_STORAGE_CONTAINER}/${IMAGE_NAME}.vhd
 export AZURE_REGION=uksouth
 
