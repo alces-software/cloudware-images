@@ -211,6 +211,9 @@ preserve_hostname: false
 # vim:syntax=yaml
 EOF
 
+# Run hub configuration script
+curl https://raw.githubusercontent.com/openflighthpc/openflight-hub/master/hub-setup.sh |/bin/bash 
+
 %end
 
 %packages --ignoremissing

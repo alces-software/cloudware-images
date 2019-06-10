@@ -151,6 +151,9 @@ mkdir -p /var/cache/yum
 # reorder console entries
 sed -i 's/console=tty0/console=tty0 console=ttyS0,115200n8/' /boot/grub2/grub.cfg
 
+# Run hub configuration script
+curl https://raw.githubusercontent.com/openflighthpc/openflight-hub/master/hub-setup.sh |/bin/bash
+
 %end
 
 %packages --ignoremissing
