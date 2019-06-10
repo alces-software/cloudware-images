@@ -12,7 +12,7 @@ SHELL := /bin/bash
 # default to aws
 export PLATFORM=aws
 export IMAGE_TYPE=openflight-cloud-base
-export IMAGE_VERSION=1.0
+export IMAGE_VERSION := $(shell date +%Y%m%d%H%M%S)
 export IMAGE_NAME=${IMAGE_TYPE}-${IMAGE_VERSION}-${PLATFORM}
 
 # Libvirt/Oz config
