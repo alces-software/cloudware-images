@@ -38,13 +38,23 @@ export AZURE_RESOURCE_GROUP=openflight-cloud
 export AZURE_IMAGE_URL=https://${AZURE_STORAGE_ACCOUNT}.blob.core.windows.net/${AZURE_STORAGE_CONTAINER}/${IMAGE_NAME}.vhd
 export AZURE_REGION=uksouth
 
-all: all-aws all-azure
+all: all-aws-7 all-aws-8 all-azure-7 all-azure-8
 
-all-aws: PLATFORM=aws
-all-aws: image distribute
+all-aws-7: PLATFORM=aws
+all-aws-7: TDL=centos7.tdl
+all-aws-7: image distribute
 
-all-azure: PLATFORM=azure
-all-azure: image distribute
+all-aws-8: PLATFORM=aws
+all-aws-8: TDL=centos8.tdl
+all-aws-8: image distribute
+
+all-azure-7: PLATFORM=azure
+all-azure-7: TDL=centos7.tdl
+all-azure-7: image distribute
+
+all-azure-8: PLATFORM=azure
+all-azure-8: TDL=centos8.tdl
+all-azure-8: image distribute
 
 image: setup build prepare upload
 
@@ -56,7 +66,7 @@ setup:
 build:
 	cp -v ${TDL} ${TDL_RENDERED}
 	cp -v ${KICKSTART} ${KICKSTART_RENDERED}
-	sed -i -e 's,c7,${IMAGE_NAME},g' ${TDL_RENDERED}
+	sed -i -e 's,c(7|8),${IMAGE_NAME},g' ${TDL_RENDERED}
 	sed -i -e 's,%BUILD_RELEASE%,${IMAGE_VERSION},g' ${KICKSTART_RENDERED}
 	echo "Building image ${IMAGE_NAME}"
 	oz-install -d3 -u ${TDL_RENDERED} -x /tmp/${IMAGE_NAME}.xml \
