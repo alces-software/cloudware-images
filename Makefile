@@ -22,7 +22,7 @@ export TDL=centos7.tdl
 export TDL_RENDERED=/tmp/${IMAGE_NAME}.tdl
 export OZ_CFG=oz.cfg
 export VM_DIR=/opt/vm
-export QEMU_IMG_BIN=/root/bin/qemu-img
+export QEMU_IMG_BIN=/root/qemu/bin/qemu-img
 export XML=domain.xml
 export XML_RENDERED=${IMAGE_NAME}.xml
 
