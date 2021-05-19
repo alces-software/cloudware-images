@@ -49,18 +49,27 @@ base-all-azure: base distribute
 base: IMAGE_TYPE=openflight-cloud-base
 base: setup build prepare upload
 
+base-test: IMAGE_TYPE=openflight-cloud-base
 base-test: setup build
 
 chead: IMAGE_TYPE=openflight-cloud-chead
 chead: TDL=centos7-chead.tdl
+chead: KICKSTART=openflight-cloud-base-${PLATFORM}.ks
 chead: setup build prepare upload
 
+chead-test: IMAGE_TYPE=openflight-cloud-chead
+chead-test: TDL=centos7-chead.tdl
+chead-test: KICKSTART=openflight-cloud-base-${PLATFORM}.ks
 chead-test: setup build
 
 cnode: IMAGE_TYPE=openflight-cloud-cnode
 cnode: TDL=centos7-cnode.tdl
+cnode: KICKSTART=openflight-cloud-base-${PLATFORM}.ks
 cnode: setup build prepare upload
 
+cnode-test: IMAGE_TYPE=openflight-cloud-cnode
+cnode-test: TDL=centos7-cnode.tdl
+cnode-test: KICKSTART=openflight-cloud-base-${PLATFORM}.ks
 cnode-test: setup build
 
 setup:
