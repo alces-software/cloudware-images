@@ -20,9 +20,6 @@ cd /tmp/playbook
 echo "  ignore_errors: True" >> openflight.yml
 ansible-playbook -i /tmp/ansibleinv --extra-vars "cluster_name=placeholder munge_key=ReplaceMe compute_nodes=cnode01" openflight.yml
 
-# Remove ansible 
-rm -rf /tmp/ansibleinv /tmp/playbook
-
 # Preconfigure desktop environments
 for i in chrome gnome kde terminal xfce xterm ; do 
     /opt/flight/bin/flight desktop prepare $i
@@ -33,3 +30,6 @@ for i in conda easybuild gridware modules singularity spack ; do
     /opt/flight/bin/flight env create $i
     /opt/flight/bin/flight env purge $i
 done
+
+# Remove ansible 
+rm -rf /tmp/ansibleinv /tmp/playbook
