@@ -38,15 +38,30 @@ export AZURE_RESOURCE_GROUP=openflight-cloud
 export AZURE_IMAGE_URL=https://${AZURE_STORAGE_ACCOUNT}.blob.core.windows.net/${AZURE_STORAGE_CONTAINER}/${IMAGE_NAME}.vhd
 export AZURE_REGION=uksouth
 
-all: all-aws all-azure
+base-all: base-all-aws base-all-azure
 
-all-aws: PLATFORM=aws
-all-aws: image distribute
+base-all-aws: PLATFORM=aws
+base-all-aws: base distribute
 
-all-azure: PLATFORM=azure
-all-azure: image distribute
+base-all-azure: PLATFORM=azure
+base-all-azure: base distribute
 
-image: setup build prepare upload
+base: IMAGE_TYPE=openflight-cloud-base
+base: setup build prepare upload
+
+base-test: setup build
+
+chead: IMAGE_TYPE=openflight-cloud-chead
+chead: TDL=centos7-chead.tdl
+chead: setup build prepare upload
+
+chead-test: setup build
+
+cnode: IMAGE_TYPE=openflight-cloud-cnode
+cnode: TDL=centos7-cnode.tdl
+cnode: setup build prepare upload
+
+cnode-test: setup build
 
 setup:
 	[ -d ${VM_DIR}/converted ] || mkdir -p ${VM_DIR}/converted
