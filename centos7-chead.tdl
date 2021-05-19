@@ -1,0 +1,22 @@
+<template version="1.0">
+  <name>c7</name>
+  <disk>
+    <size>8</size>
+  </disk>
+  <os>
+    <name>CentOS-7</name>
+    <version>0</version>
+    <arch>x86_64</arch>
+    <install type='iso'>
+      <iso>http://mirror.ox.ac.uk/sites/mirror.centos.org/7/isos/x86_64/CentOS-7-x86_64-DVD-2009.iso</iso>
+    </install>
+  </os>
+  <description>CentOS 7 Headnode Install</description>
+  <files>
+    <file name="/tmp/flight-chead.sh" type="url">file://customscripts/chead.sh</file>
+  </files>
+  <commands>
+    <command name="Run customisations">bash /tmp/flight-chead.sh</command>
+  </commands>
+</template>
+
