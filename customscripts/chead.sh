@@ -28,7 +28,7 @@ done
 # Preconfigure software envs
 for i in conda easybuild gridware modules singularity spack ; do 
     /opt/flight/bin/flight env create $i
-    /opt/flight/bin/flight env purge $i
+    /opt/flight/bin/flight env purge --yes $i
 done
 
 # Remove ansible 
